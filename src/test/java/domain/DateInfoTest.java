@@ -18,13 +18,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  * -----------------------------------------------------------
  * 2023-11-09        qkrtn_ulqpbq2       최초 생성
  */
-public class OrderInfoTest {
+public class DateInfoTest {
     @DisplayName("방문날짜를 올바르게 입력했는지 검증합니다. - 정상으로 날짜를 입력한 경우를 검증합니다.")
     @Test
     void enterNormalAmount() {
         String readDate = "12";
-        OrderInfo orderInfo = new OrderInfo(readDate);
-        assertThat(orderInfo.getVisitedDate()).isEqualTo(12);
+        DateInfo dateInfo = new DateInfo(readDate);
+        assertThat(dateInfo.getVisitedDate()).isEqualTo(12);
     }
 
     @DisplayName("방문날짜를 올바르게 입력했는지 검증합니다. - 문자만 입력한 경우, 예외를 발생시킵니다.")
@@ -32,9 +32,9 @@ public class OrderInfoTest {
     void enterString() {
         String readDate = "abcde";
 
-        assertThatThrownBy(() -> new OrderInfo(readDate))
+        assertThatThrownBy(() -> new DateInfo(readDate))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new OrderInfo(readDate))
+        assertThatThrownBy(() -> new DateInfo(readDate))
                 .hasMessage(ExceptionMessage.VISITED_DATE_NOT_NUMBER.getMessage());
     }
 
@@ -43,9 +43,9 @@ public class OrderInfoTest {
     void enterNumberWithString() {
         String readDate = "123abc";
 
-        assertThatThrownBy(() -> new OrderInfo(readDate))
+        assertThatThrownBy(() -> new DateInfo(readDate))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new OrderInfo(readDate))
+        assertThatThrownBy(() -> new DateInfo(readDate))
                 .hasMessage(ExceptionMessage.VISITED_DATE_NOT_NUMBER.getMessage());
     }
 
@@ -54,9 +54,9 @@ public class OrderInfoTest {
     void enterSpace() {
         String readDate = "   ";
 
-        assertThatThrownBy(() -> new OrderInfo(readDate))
+        assertThatThrownBy(() -> new DateInfo(readDate))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new OrderInfo(readDate))
+        assertThatThrownBy(() -> new DateInfo(readDate))
                 .hasMessage(ExceptionMessage.VISITED_DATE_NOT_NUMBER.getMessage());
     }
 
@@ -65,9 +65,9 @@ public class OrderInfoTest {
     void enterNewLine() {
         String readDate = "\n";
 
-        assertThatThrownBy(() -> new OrderInfo(readDate))
+        assertThatThrownBy(() -> new DateInfo(readDate))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new OrderInfo(readDate))
+        assertThatThrownBy(() -> new DateInfo(readDate))
                 .hasMessage(ExceptionMessage.VISITED_DATE_NOT_NUMBER.getMessage());
     }
 
@@ -76,9 +76,9 @@ public class OrderInfoTest {
     void enterNothing() {
         String readDate = "";
 
-        assertThatThrownBy(() -> new OrderInfo(readDate))
+        assertThatThrownBy(() -> new DateInfo(readDate))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new OrderInfo(readDate))
+        assertThatThrownBy(() -> new DateInfo(readDate))
                 .hasMessage(ExceptionMessage.VISITED_DATE_NOT_NUMBER.getMessage());
     }
 
@@ -87,9 +87,9 @@ public class OrderInfoTest {
     void enterZero() {
         String inputAmount = "0";
 
-        assertThatThrownBy(() -> new OrderInfo(inputAmount))
+        assertThatThrownBy(() -> new DateInfo(inputAmount))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new OrderInfo(inputAmount))
+        assertThatThrownBy(() -> new DateInfo(inputAmount))
                 .hasMessage(ExceptionMessage.VISITED_DATE_NOT_NUMBER.getMessage());
     }
 }
