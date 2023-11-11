@@ -61,36 +61,39 @@ public class DiscountCalculator {
         return specialDiscount;
     }
 
-    public int calculateDiscount(int totalOrderPrice, int visitedDate, OrderInfo orderInfo) {
-        christmasDiscount(visitedDate);
-        weekDayDiscount(visitedDate, orderInfo);
-        weekendDiscount(visitedDate, orderInfo);
-        specialDiscountDay(visitedDate);
-        return ZERO;
+    public void calculateDiscount(int totalOrderPrice, int visitedDate, OrderInfo orderInfo) {
+        totalDiscountPrice += christmasDiscount(visitedDate);
+        totalDiscountPrice += weekDayDiscount(visitedDate, orderInfo);
+        totalDiscountPrice += weekendDiscount(visitedDate, orderInfo);
+        totalDiscountPrice += specialDiscountDay(visitedDate);
     }
 
-    private void christmasDiscount(int visitedDate) {
+    private int christmasDiscount(int visitedDate) {
         int daysUntilChristmas = visitedDate - 1;
         int discountAmount = INITIAL_DISCOUNT_AMOUNT + daysUntilChristmas * DAILY_DISCOUNT_INCREASE;
         christmasDiscount = Math.min(discountAmount, MAX_DISCOUNT_AMOUNT);
+        return christmasDiscount;
     }
 
-    private void weekDayDiscount(int visitedDate, OrderInfo orderInfo){
+    private int weekDayDiscount(int visitedDate, OrderInfo orderInfo){
         if (isWeekday() && hasDessertOrder(orderInfo)) {
             weekDayDiscount = getWeekdayDessertDiscount(orderInfo);
         }
+        return weekDayDiscount;
     }
 
-    private void weekendDiscount(int visitedDate, OrderInfo orderInfo){
+    private int weekendDiscount(int visitedDate, OrderInfo orderInfo){
         if (isWeekend() && hasMainOrder(orderInfo)) {
             weekendDiscount = getWeekendMainDiscount(orderInfo);
         }
+        return weekendDiscount;
     }
 
-    private void specialDiscountDay(int visitedDate){
+    private int specialDiscountDay(int visitedDate){
         if(customerVisitedDay == DayOfWeek.SUNDAY || isChristmas(visitedDate)){
             specialDiscount = INITIAL_DISCOUNT_AMOUNT;
         };
+        return specialDiscount;
     }
 
     private boolean isChristmas(int visitedDate){

@@ -24,11 +24,16 @@ public class ChristmasController {
     private static int totalOrderPrice;
 
     private static OrderInfo customerOrderInfo;
+    private static int totalDiscountPrize;
+    private static MenuItem champagne;
+    private static EventBadge eventBadge;
 
     public void playChristmas(){
         try {
             orderStart();
             calculateDiscount();
+            givePromotion();
+            giveEventBadge();
         } catch(NumberFormatException e){
             System.out.println(ExceptionMessage.VISITED_DATE_NOT_NUMBER);
         } catch(IllegalArgumentException e){
@@ -47,9 +52,16 @@ public class ChristmasController {
     private void calculateDiscount(){
         DiscountCalculator discountCalculator = new DiscountCalculator(visitedDate);
         discountCalculator.calculateDiscount(visitedDate, totalOrderPrice, customerOrderInfo);
-        int discountPrize = discountCalculator.getTotalDiscountPrice();
+        totalDiscountPrize = discountCalculator.getTotalDiscountPrice();
+    }
+
+    private void givePromotion(){
         Promotion promotion = new Promotion(customerOrderInfo);
-        MenuItem champagne = promotion.getChampagne();
+        champagne = promotion.getChampagne();
+    }
+
+    private void giveEventBadge(){
+        eventBadge = EventBadge.getBadgeByBenefitAmount(totalDiscountPrize);
     }
 
 
