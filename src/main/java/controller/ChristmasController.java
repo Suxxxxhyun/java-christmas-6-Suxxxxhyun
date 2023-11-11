@@ -1,6 +1,6 @@
 package controller;
 
-import domain.DateInfo;
+import domain.*;
 import exception.ExceptionMessage;
 import view.InputView;
 
@@ -29,5 +29,6 @@ public class ChristmasController {
 
     public void orderStart(){
         DateInfo dateInfo = new DateInfo(InputView.readDate());
+        OrderInfo orderInfo = new OrderInfo(InputView.readOrder());
     }
 }
