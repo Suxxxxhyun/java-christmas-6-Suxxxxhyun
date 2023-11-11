@@ -23,7 +23,8 @@ public class OrderInfo {
 
     private Map<MenuItem, Integer> orderInfo;
 
-    private int sum;
+    private int totalCount;
+    private int totalOrderPrice;
 
     public OrderInfo(String readOrder){
         validate(readOrder);
@@ -37,8 +38,12 @@ public class OrderInfo {
         return Collections.unmodifiableMap(orderInfo);
     }
 
-    public int getSum(){
-        return sum;
+    public int getTotalCount(){
+        return totalCount;
+    }
+
+    public int getTotalOrderPrice(){
+        return totalOrderPrice;
     }
 
     private void validate(String readOrder){
@@ -47,7 +52,8 @@ public class OrderInfo {
     }
 
     private void init() {
-        sum = ZERO;
+        totalCount = ZERO;
+        totalOrderPrice = ZERO;
         orderInfo = new HashMap<>();
     }
 
@@ -74,7 +80,7 @@ public class OrderInfo {
     }
 
     private void checkExceedQuantity() {
-        if(sum > 20){
+        if(totalCount > 20){
             ExceptionMessage.INVALID_ORDER.throwException();
         }
     }
@@ -110,7 +116,8 @@ public class OrderInfo {
     private void updateOrderInfo(MenuItem menuItem, int quantity) {
         checkDuplicateMenu(menuItem);
         orderInfo.put(menuItem, quantity);
-        sum += quantity;
+        totalCount += quantity;
+        totalOrderPrice += (menuItem.getPrice() * quantity);
     }
 
     private void checkDuplicateMenu(MenuItem menuItem){

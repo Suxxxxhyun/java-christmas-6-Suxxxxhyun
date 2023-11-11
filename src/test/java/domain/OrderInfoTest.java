@@ -34,16 +34,17 @@ public class OrderInfoTest {
                 .containsEntry(MenuItem.BEVERAGE_2, 1)
                 .containsEntry(MenuItem.DESSERT_1, 1);
 
-        assertThat(orderInfo.getSum()).isEqualTo(4);
+        assertThat(orderInfo.getTotalCount()).isEqualTo(4);
+        assertThat(orderInfo.getTotalOrderPrice()).isEqualTo(145000);
     }
     @DisplayName("주문메뉴와 개수를 올바르게 입력했는지 검증합니다. - 띄어쓰기만 입력한 경우, 예외를 발생시킵니다.")
     @Test
     void enterSpace() {
         String readOrder = "   ";
 
-        assertThatThrownBy(() -> new OrderInfo(readOrder))
-                .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new OrderInfo(readOrder))
+        assertThatThrownBy(() -> {
+            new OrderInfo(readOrder);
+        }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ExceptionMessage.INVALID_ORDER.getMessage());
     }
 
@@ -52,9 +53,9 @@ public class OrderInfoTest {
     void enterNotFormat(){
         String readOrder = "해산물파스타-2,레드와인/1,초코케이크1";
 
-        assertThatThrownBy(() -> new OrderInfo(readOrder))
-                .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new OrderInfo(readOrder))
+        assertThatThrownBy(() -> {
+            new OrderInfo(readOrder);
+        }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ExceptionMessage.INVALID_ORDER.getMessage());
     }
 
@@ -63,9 +64,9 @@ public class OrderInfoTest {
     void enterNotFormat2(){
         String readOrder = "해산물파스타-0,레드와인--1";
 
-        assertThatThrownBy(() -> new OrderInfo(readOrder))
-                .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new OrderInfo(readOrder))
+        assertThatThrownBy(() -> {
+            new OrderInfo(readOrder);
+        }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ExceptionMessage.INVALID_ORDER.getMessage());
     }
 
@@ -74,9 +75,9 @@ public class OrderInfoTest {
     void enterNotExistMenu(){
         String readOrder = "제미제미-3,레드와인-1,초코케이크1";
 
-        assertThatThrownBy(() -> new OrderInfo(readOrder))
-                .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new OrderInfo(readOrder))
+        assertThatThrownBy(() -> {
+            new OrderInfo(readOrder);
+        }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ExceptionMessage.INVALID_ORDER.getMessage());
     }
 
@@ -85,9 +86,9 @@ public class OrderInfoTest {
     void enterDuplicateMenu(){
         String readOrder = "레드와인-1,레드와인-1,초코케이크1";
 
-        assertThatThrownBy(() -> new OrderInfo(readOrder))
-                .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new OrderInfo(readOrder))
+        assertThatThrownBy(() -> {
+            new OrderInfo(readOrder);
+        }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ExceptionMessage.INVALID_ORDER.getMessage());
     }
 
@@ -96,9 +97,9 @@ public class OrderInfoTest {
     void enterExceedQuantity(){
         String readOrder = "레드와인-100,레드와인-1,초코케이크1";
 
-        assertThatThrownBy(() -> new OrderInfo(readOrder))
-                .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new OrderInfo(readOrder))
+        assertThatThrownBy(() -> {
+            new OrderInfo(readOrder);
+        }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ExceptionMessage.INVALID_ORDER.getMessage());
     }
 
@@ -107,9 +108,9 @@ public class OrderInfoTest {
     void enterOnlyBeverage(){
         String readOrder = "제로콜라-1";
 
-        assertThatThrownBy(() -> new OrderInfo(readOrder))
-                .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new OrderInfo(readOrder))
+        assertThatThrownBy(() -> {
+            new OrderInfo(readOrder);
+        }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ExceptionMessage.INVALID_ORDER.getMessage());
     }
 }
