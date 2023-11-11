@@ -27,6 +27,7 @@ public class ChristmasController {
     private static int totalDiscountPrize;
     private static MenuItem champagne;
     private static EventBadge eventBadge;
+    private static final int ZERO = 0;
 
     public void playChristmas(){
         try {
@@ -58,6 +59,14 @@ public class ChristmasController {
     private void givePromotion(){
         Promotion promotion = new Promotion(customerOrderInfo);
         champagne = promotion.getChampagne();
+        totalDiscountPrize += getPromotionBenefit();
+    }
+
+    private int getPromotionBenefit(){
+        if(champagne == MenuItem.BEVERAGE_3){
+            return MenuItem.BEVERAGE_3.getPrice();
+        }
+        return ZERO;
     }
 
     private void giveEventBadge(){

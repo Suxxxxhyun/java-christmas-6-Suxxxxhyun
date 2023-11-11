@@ -130,10 +130,10 @@ public class DiscountCalculator {
 
     private int getWeekdayDessertDiscount(OrderInfo orderInfo) {
         Map<MenuItem, Integer> orderInfoMap = orderInfo.getOrderInfo();
-        long dessertCount = orderInfoMap.keySet().stream()
-                .filter(menuItem -> menuItem.getCategory() == Category.DESSERT)
-                .count();
-
+        long dessertCount = orderInfoMap.entrySet().stream()
+                .filter(entry -> entry.getKey().getCategory() == Category.DESSERT)
+                .mapToLong(Map.Entry::getValue)
+                .sum();
         return (int) dessertCount * YEAR;
     }
 

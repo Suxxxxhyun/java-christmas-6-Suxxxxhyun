@@ -12,9 +12,10 @@ package domain;
  * 2023-11-11        qkrtn_ulqpbq2       최초 생성
  */
 public enum EventBadge {
-    STAR("별", 5000),
+
+    SANTA("산타", 20000),
     TREE("트리", 10000),
-    SANTA("산타", 20000);
+    STAR("별", 5000);
 
     private final int benefitAmount;
     private final String name;
