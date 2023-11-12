@@ -7,6 +7,8 @@ import view.InputView;
 import java.time.LocalDate;
 import java.util.Map;
 
+import static view.OutputView.printInfoAfterOrder;
+
 /**
  * packageName    : controller
  * fileName       : ChristmasController
@@ -28,6 +30,7 @@ public class ChristmasController {
     private static MenuItem champagne;
     private static EventBadge eventBadge;
     private static final int ZERO = 0;
+    private static DiscountCalculator discountCalculator;
 
     public void playChristmas(){
         try {
@@ -35,6 +38,7 @@ public class ChristmasController {
             calculateDiscount();
             givePromotion();
             giveEventBadge();
+            printInfo();
         } catch(NumberFormatException e){
             System.out.println(ExceptionMessage.VISITED_DATE_NOT_NUMBER);
         } catch(IllegalArgumentException e){
@@ -47,11 +51,11 @@ public class ChristmasController {
         OrderInfo orderInfo = new OrderInfo(InputView.readOrder());
         visitedDate = dateInfo.getVisitedDate();
         totalOrderPrice = orderInfo.getTotalOrderPrice();
-        customerOrderInfo = (OrderInfo) orderInfo.getOrderInfo();
+        customerOrderInfo = orderInfo;
     }
 
     private void calculateDiscount(){
-        DiscountCalculator discountCalculator = new DiscountCalculator(visitedDate);
+        discountCalculator = new DiscountCalculator(visitedDate);
         discountCalculator.calculateDiscount(visitedDate, totalOrderPrice, customerOrderInfo);
         totalDiscountPrize = discountCalculator.getTotalDiscountPrice();
     }
@@ -71,6 +75,10 @@ public class ChristmasController {
 
     private void giveEventBadge(){
         eventBadge = EventBadge.getBadgeByBenefitAmount(totalDiscountPrize);
+    }
+
+    private void printInfo(){
+        printInfoAfterOrder(eventBadge, customerOrderInfo, champagne, discountCalculator, totalDiscountPrize);
     }
 
 

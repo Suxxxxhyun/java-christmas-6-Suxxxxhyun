@@ -21,6 +21,7 @@ public class DiscountCalculator {
     private static final int MAX_DISCOUNT_AMOUNT = 3400;
     private static final int ZERO = 0;
     private static final int DECEMBER_START = 1;
+    private static final int CHRISTMAS = 25;
     private static final int DECEMBER = 12;
     private static final int YEAR = 2023;
     private static final int ONE = 1;
@@ -63,16 +64,29 @@ public class DiscountCalculator {
 
     public void calculateDiscount(int totalOrderPrice, int visitedDate, OrderInfo orderInfo) {
         totalDiscountPrice += christmasDiscount(visitedDate);
+        System.out.println("크리스마스 데이 할인 = " + totalDiscountPrice);
         totalDiscountPrice += weekDayDiscount(visitedDate, orderInfo);
+        System.out.println("평일 할인 = " + totalDiscountPrice);
         totalDiscountPrice += weekendDiscount(visitedDate, orderInfo);
+        System.out.println("주말 할인 = " + totalDiscountPrice);
         totalDiscountPrice += specialDiscountDay(visitedDate);
+        System.out.println("특별 할인 = " + totalDiscountPrice);
     }
 
     private int christmasDiscount(int visitedDate) {
-        int daysUntilChristmas = visitedDate - 1;
-        int discountAmount = INITIAL_DISCOUNT_AMOUNT + daysUntilChristmas * DAILY_DISCOUNT_INCREASE;
-        christmasDiscount = Math.min(discountAmount, MAX_DISCOUNT_AMOUNT);
+        if(isChristmasDiscountDate(visitedDate)){
+            int daysUntilChristmas = visitedDate - 1;
+            int discountAmount = INITIAL_DISCOUNT_AMOUNT + daysUntilChristmas * DAILY_DISCOUNT_INCREASE;
+            christmasDiscount = Math.min(discountAmount, MAX_DISCOUNT_AMOUNT);
+        }
         return christmasDiscount;
+    }
+
+    private boolean isChristmasDiscountDate(int visitedDate){
+        if(visitedDate >= DECEMBER_START && visitedDate <= CHRISTMAS){
+            return true;
+        }
+        return false;
     }
 
     private int weekDayDiscount(int visitedDate, OrderInfo orderInfo){

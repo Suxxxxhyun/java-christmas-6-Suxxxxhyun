@@ -35,7 +35,7 @@ public class OrderInfo {
     }
 
     public Map<MenuItem, Integer> getOrderInfo() {
-        return Collections.unmodifiableMap(orderInfo);
+        return orderInfo;
     }
 
     public int getTotalCount(){
