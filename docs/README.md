@@ -1,5 +1,5 @@
 ### 객체 간의 협력관계 파악하기
-<img src="./christmas.png" >
+<img src="./christmas.jpg" >
 
 ### 프로그래밍 요구사항
 
