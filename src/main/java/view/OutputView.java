@@ -35,10 +35,11 @@ public class OutputView {
     private static final String EVENT_BADGE = "<12월 이벤트 배지>";
     private static final String QUANTITY = "개";
     private static final String WON = "원";
-    private static final String EMPTY = "없음\n";
+    private static final String EMPTY = "없음";
     private static final int ONE = 1;
     private static final String SPACE = " ";
     private static final String DASH = "-";
+    private static final char NEW_LINE = '\n';
 
     public static void printInfoAfterOrder(EventBadge eventBadge, OrderInfo orderInfo, MenuItem champagne, DiscountCalculator discountCalculator, int totalDiscountPrize){
         printEventPreviewMessage();
@@ -67,7 +68,7 @@ public class OutputView {
 
     private static void printTotalOrderPriceBeforeDiscount(OrderInfo orderInfo){
         System.out.println(TOTAL_ORDER_PRICE_BEFORE_DISCOUNT);
-        System.out.println(numberFormat(orderInfo.getTotalOrderPrice()) + '\n');
+        System.out.println(numberFormat(orderInfo.getTotalOrderPrice()) + NEW_LINE);
     }
 
     private static String numberFormat(int price){
@@ -79,8 +80,8 @@ public class OutputView {
     private static void printPromotionMenu(MenuItem champagne){
         System.out.println(PROMOTION_MENU);
         Optional.ofNullable(champagne)
-                .map(item -> item.getName() + SPACE + ONE + QUANTITY)
-                .ifPresentOrElse(System.out::println, () -> System.out.println(EMPTY));
+                .map(item -> item.getName() + SPACE + ONE + QUANTITY + NEW_LINE)
+                .ifPresentOrElse(System.out::println, () -> System.out.println(EMPTY + NEW_LINE));
     }
 
     private static void printBenefitDetails(DiscountCalculator discountCalculator, MenuItem champagne){
@@ -95,7 +96,7 @@ public class OutputView {
             printPromotionEvent(champagne);
             return;
         }
-        System.out.println(EMPTY);
+        System.out.println(EMPTY + NEW_LINE);
     }
 
     private static boolean isDiscount(DiscountCalculator discountCalculator){
@@ -115,13 +116,13 @@ public class OutputView {
     private static void printPromotionEvent(MenuItem champagne){
         if(champagne == MenuItem.BEVERAGE_3){
             System.out.print(PROMOTION_EVENT);
-            System.out.println(DASH + numberFormat(champagne.getPrice()) + '\n');
+            System.out.println(DASH + numberFormat(champagne.getPrice()) + NEW_LINE);
         }
     }
 
     private static void printTotalBenefitPrice(int totalDiscountPrize){
         System.out.println(TOTAL_BENEFIT_PRICE);
-        System.out.println(isTotalDiscountPrizeZero(totalDiscountPrize) + numberFormat(totalDiscountPrize) + '\n');
+        System.out.println(isTotalDiscountPrizeZero(totalDiscountPrize) + numberFormat(totalDiscountPrize) + NEW_LINE);
     }
 
     private static String isTotalDiscountPrizeZero(int totalDiscountPrize){
@@ -135,7 +136,7 @@ public class OutputView {
         System.out.println(AFTER_DISCOUNT_PAYMENT_PRICE);
         int paymentPrice = orderInfo.getTotalOrderPrice() - totalDiscountPrize;
         isNotEmptyChampagne(champagne, paymentPrice);
-        System.out.println(numberFormat(paymentPrice) + '\n');
+        System.out.println(numberFormat(paymentPrice) + NEW_LINE);
     }
 
     private static int isNotEmptyChampagne(MenuItem champagne, int paymentPrice){
@@ -150,6 +151,6 @@ public class OutputView {
         System.out.println(EVENT_BADGE);
         Optional.ofNullable(eventBadge)
                 .map(item -> item.getName())
-                .ifPresentOrElse(System.out::println, () -> System.out.println(EMPTY));
+                .ifPresentOrElse(System.out::println, () -> System.out.println(EMPTY + NEW_LINE));
     }
 }
