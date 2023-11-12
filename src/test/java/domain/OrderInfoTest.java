@@ -9,17 +9,6 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * packageName    : domain
- * fileName       : OrderInfoTest
- * author         : qkrtn_ulqpbq2
- * date           : 2023-11-09
- * description    :
- * ===========================================================
- * DATE              AUTHOR             NOTE
- * -----------------------------------------------------------
- * 2023-11-09        qkrtn_ulqpbq2       최초 생성
- */
 public class OrderInfoTest {
 
     @DisplayName("주문메뉴를 올바르게 입력했는지 검증합니다. - 정상으로 주문메뉴를 입력한 경우를 검증합니다.")

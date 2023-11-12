@@ -4,17 +4,6 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Map;
 
-/**
- * packageName    : domain
- * fileName       : Discount
- * author         : qkrtn_ulqpbq2
- * date           : 2023-11-11
- * description    :
- * ===========================================================
- * DATE              AUTHOR             NOTE
- * -----------------------------------------------------------
- * 2023-11-11        qkrtn_ulqpbq2       최초 생성
- */
 public class DiscountCalculator {
     private static final int INITIAL_DISCOUNT_AMOUNT = 1000;
     private static final int DAILY_DISCOUNT_INCREASE = 100;

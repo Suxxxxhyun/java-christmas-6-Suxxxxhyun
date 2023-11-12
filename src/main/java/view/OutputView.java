@@ -9,17 +9,6 @@ import java.text.DecimalFormat;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * packageName    : view
- * fileName       : OutputView
- * author         : qkrtn_ulqpbq2
- * date           : 2023-11-12
- * description    :
- * ===========================================================
- * DATE              AUTHOR             NOTE
- * -----------------------------------------------------------
- * 2023-11-12        qkrtn_ulqpbq2       최초 생성
- */
 public class OutputView {
     private static final String EVENT_PREVIEW_MESSAGE = "12월 26일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n";
     private static final String ORDER_MENU = "<주문 메뉴>";

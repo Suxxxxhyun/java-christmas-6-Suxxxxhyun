@@ -1,20 +1,5 @@
 package domain;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
-/**
- * packageName    : domain
- * fileName       : MenuItem
- * author         : qkrtn_ulqpbq2
- * date           : 2023-11-11
- * description    :
- * ===========================================================
- * DATE              AUTHOR             NOTE
- * -----------------------------------------------------------
- * 2023-11-11        qkrtn_ulqpbq2       최초 생성
- */
 public enum MenuItem {
     APPETIZER_1("양송이수프", 6000, Category.APPETIZER),
     APPETIZER_2("타파스", 5500, Category.APPETIZER),

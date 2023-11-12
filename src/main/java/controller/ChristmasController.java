@@ -4,22 +4,8 @@ import domain.*;
 import exception.ExceptionMessage;
 import view.InputView;
 
-import java.time.LocalDate;
-import java.util.Map;
-
 import static view.OutputView.printInfoAfterOrder;
 
-/**
- * packageName    : controller
- * fileName       : ChristmasController
- * author         : qkrtn_ulqpbq2
- * date           : 2023-11-09
- * description    :
- * ===========================================================
- * DATE              AUTHOR             NOTE
- * -----------------------------------------------------------
- * 2023-11-09        qkrtn_ulqpbq2       최초 생성
- */
 public class ChristmasController {
 
     private static int visitedDate;

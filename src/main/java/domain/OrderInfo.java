@@ -3,23 +3,11 @@ package domain;
 import exception.ExceptionMessage;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
-
-/**
- * packageName    : domain
- * fileName       : OrderInfo
- * author         : qkrtn_ulqpbq2
- * date           : 2023-11-09
- * description    :
- * ===========================================================
- * DATE              AUTHOR             NOTE
- * -----------------------------------------------------------
- * 2023-11-09        qkrtn_ulqpbq2       최초 생성
- */
 public class OrderInfo {
 
     private static final int ZERO = 0;
+    private static final int TWENTY = 20;
 
     private Map<MenuItem, Integer> orderInfo;
 
@@ -80,7 +68,7 @@ public class OrderInfo {
     }
 
     private void checkExceedQuantity() {
-        if(totalCount > 20){
+        if(totalCount > TWENTY){
             ExceptionMessage.INVALID_ORDER.throwException();
         }
     }

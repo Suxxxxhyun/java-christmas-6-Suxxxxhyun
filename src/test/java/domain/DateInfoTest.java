@@ -7,17 +7,6 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-/**
- * packageName    : domain
- * fileName       : OrderInfoTest
- * author         : qkrtn_ulqpbq2
- * date           : 2023-11-09
- * description    :
- * ===========================================================
- * DATE              AUTHOR             NOTE
- * -----------------------------------------------------------
- * 2023-11-09        qkrtn_ulqpbq2       최초 생성
- */
 public class DateInfoTest {
     @DisplayName("방문날짜를 올바르게 입력했는지 검증합니다. - 정상으로 날짜를 입력한 경우를 검증합니다.")
     @Test

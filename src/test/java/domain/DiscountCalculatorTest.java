@@ -5,17 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * packageName    : domain
- * fileName       : DiscountCalculatorTest
- * author         : qkrtn_ulqpbq2
- * date           : 2023-11-11
- * description    :
- * ===========================================================
- * DATE              AUTHOR             NOTE
- * -----------------------------------------------------------
- * 2023-11-11        qkrtn_ulqpbq2       최초 생성
- */
 public class DiscountCalculatorTest {
     @DisplayName("총 주문 금액과 방문날짜에 따라 할인이 올바르게 적용되는지 검증한다.")
     @Test

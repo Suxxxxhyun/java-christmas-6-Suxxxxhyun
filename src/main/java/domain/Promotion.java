@@ -1,16 +1,5 @@
 package domain;
 
-/**
- * packageName    : domain
- * fileName       : Promotion
- * author         : qkrtn_ulqpbq2
- * date           : 2023-11-11
- * description    :
- * ===========================================================
- * DATE              AUTHOR             NOTE
- * -----------------------------------------------------------
- * 2023-11-11        qkrtn_ulqpbq2       최초 생성
- */
 public class Promotion {
 
     private static final int FREE_CHAMPAGNE_THRESHOLD = 120000;
