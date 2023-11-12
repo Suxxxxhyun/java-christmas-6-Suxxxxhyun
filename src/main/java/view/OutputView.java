@@ -4,31 +4,21 @@ import domain.DiscountCalculator;
 import domain.EventBadge;
 import domain.MenuItem;
 import domain.OrderInfo;
+import util.OutputMessage;
 
 import java.text.DecimalFormat;
 import java.util.Map;
 import java.util.Optional;
 
 public class OutputView {
-    private static final String EVENT_PREVIEW_MESSAGE = "12월 26일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n";
-    private static final String ORDER_MENU = "<주문 메뉴>";
-    private static final String TOTAL_ORDER_PRICE_BEFORE_DISCOUNT = "<할인 전 총주문 금액>";
-    private static final String PROMOTION_MENU = "<증정 메뉴>";
-    private static final String BENEFIT_DETAILS = "<혜택 내역>";
-    private static final String CHRISTMAS_DISCOUNT = "크리스마스 디데이 할인: ";
-    private static final String WEEKDAY_DISCOUNT = "평일 할인 : ";
-    private static final String SPECIAL_DISCOUNT = "특별 할인 : ";
-    private static final String PROMOTION_EVENT = "증정 이벤트: ";
-    private static final String TOTAL_BENEFIT_PRICE = "<총혜택 금액>";
-    private static final String AFTER_DISCOUNT_PAYMENT_PRICE = "<할인 후 예상 결제 금액>";
-    private static final String EVENT_BADGE = "<12월 이벤트 배지>";
-    private static final String QUANTITY = "개";
-    private static final String WON = "원";
-    private static final String EMPTY = "없음";
+
     private static final int ONE = 1;
     private static final String SPACE = " ";
     private static final String DASH = "-";
-    private static final char NEW_LINE = '\n';
+    private static final String NEW_LINE = "\n";
+    private static final String QUANTITY = "개";
+    private static final String WON = "원";
+    private static final String EMPTY = "없음";
 
     public static void printInfoAfterOrder(EventBadge eventBadge, OrderInfo orderInfo, MenuItem champagne, DiscountCalculator discountCalculator, int totalDiscountPrize){
         printEventPreviewMessage();
@@ -42,11 +32,11 @@ public class OutputView {
     }
 
     private static void printEventPreviewMessage(){
-        System.out.println(EVENT_PREVIEW_MESSAGE);
+        System.out.println(OutputMessage.EVENT_PREVIEW_MESSAGE.getMessage() + NEW_LINE);
     }
 
     private static void printOrderMenu(OrderInfo orderInfo){
-        System.out.println(ORDER_MENU);
+        System.out.println(OutputMessage.ORDER_MENU.getMessage());
         for (Map.Entry<MenuItem, Integer> entry : orderInfo.getOrderInfo().entrySet()) {
             MenuItem menuItem = entry.getKey();
             int quantity = entry.getValue();
@@ -56,7 +46,7 @@ public class OutputView {
     }
 
     private static void printTotalOrderPriceBeforeDiscount(OrderInfo orderInfo){
-        System.out.println(TOTAL_ORDER_PRICE_BEFORE_DISCOUNT);
+        System.out.println(OutputMessage.TOTAL_ORDER_PRICE_BEFORE_DISCOUNT.getMessage());
         System.out.println(numberFormat(orderInfo.getTotalOrderPrice()) + NEW_LINE);
     }
 
@@ -67,20 +57,20 @@ public class OutputView {
     }
 
     private static void printPromotionMenu(MenuItem champagne){
-        System.out.println(PROMOTION_MENU);
+        System.out.println(OutputMessage.PROMOTION_MENU.getMessage());
         Optional.ofNullable(champagne)
                 .map(item -> item.getName() + SPACE + ONE + QUANTITY + NEW_LINE)
                 .ifPresentOrElse(System.out::println, () -> System.out.println(EMPTY + NEW_LINE));
     }
 
     private static void printBenefitDetails(DiscountCalculator discountCalculator, MenuItem champagne){
-        System.out.println(BENEFIT_DETAILS);
+        System.out.println(OutputMessage.BENEFIT_DETAILS.getMessage());
         if(isDiscount(discountCalculator) && isPromotion(champagne)){
-            System.out.print(CHRISTMAS_DISCOUNT);
+            System.out.print(OutputMessage.CHRISTMAS_DISCOUNT.getMessage());
             System.out.println(DASH + numberFormat(discountCalculator.getChristmasDiscount()));
-            System.out.print(WEEKDAY_DISCOUNT);
+            System.out.print(OutputMessage.WEEKDAY_DISCOUNT.getMessage());
             System.out.println(DASH + numberFormat(discountCalculator.getWeekDayDiscount()));
-            System.out.print(SPECIAL_DISCOUNT);
+            System.out.print(OutputMessage.SPECIAL_DISCOUNT.getMessage());
             System.out.println(DASH + numberFormat(discountCalculator.getSpecialDiscount()));
             printPromotionEvent(champagne);
             return;
@@ -104,13 +94,13 @@ public class OutputView {
 
     private static void printPromotionEvent(MenuItem champagne){
         if(champagne == MenuItem.BEVERAGE_3){
-            System.out.print(PROMOTION_EVENT);
+            System.out.print(OutputMessage.PROMOTION_EVENT.getMessage());
             System.out.println(DASH + numberFormat(champagne.getPrice()) + NEW_LINE);
         }
     }
 
     private static void printTotalBenefitPrice(int totalDiscountPrize){
-        System.out.println(TOTAL_BENEFIT_PRICE);
+        System.out.println(OutputMessage.TOTAL_BENEFIT_PRICE.getMessage());
         System.out.println(isTotalDiscountPrizeZero(totalDiscountPrize) + numberFormat(totalDiscountPrize) + NEW_LINE);
     }
 
@@ -122,7 +112,7 @@ public class OutputView {
     }
 
     private static void printAfterDiscountPaymentPrice(OrderInfo orderInfo, int totalDiscountPrize, MenuItem champagne){
-        System.out.println(AFTER_DISCOUNT_PAYMENT_PRICE);
+        System.out.println(OutputMessage.AFTER_DISCOUNT_PAYMENT_PRICE.getMessage());
         int paymentPrice = orderInfo.getTotalOrderPrice() - totalDiscountPrize;
         isNotEmptyChampagne(champagne, paymentPrice);
         System.out.println(numberFormat(paymentPrice) + NEW_LINE);
@@ -137,7 +127,7 @@ public class OutputView {
     }
 
     private static void printEventBadge(EventBadge eventBadge){
-        System.out.println(EVENT_BADGE);
+        System.out.println(OutputMessage.EVENT_BADGE.getMessage());
         Optional.ofNullable(eventBadge)
                 .map(item -> item.getName())
                 .ifPresentOrElse(System.out::println, () -> System.out.println(EMPTY + NEW_LINE));
