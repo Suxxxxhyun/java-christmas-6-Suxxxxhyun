@@ -1,3 +1,56 @@
+### 객체 간의 협력관계 파악하기
+<img src="./christmas.png" >
+
+### 프로그래밍 요구사항
+
+- [ ✅ ] JDK 17 버전에서 실행 가능해야 한다.
+- [ ✅ ] indent(인덴트, 들여쓰기) depth를 3이 넘지 않도록 구현한다. 2까지만 허용한다.
+- [ ✅ ] 3항 연산자를 쓰지 않는다.
+- [ ✅ ] JUnit 5와 AssertJ를 이용하여 본인이 정리한 기능 목록이 정상 동작함을 테스트 코드로 확인한다.
+- [ ✅ ] else 예약어를 쓰지 않는다.
+- [ ✅ ] 도메인 로직에 단위 테스트를 구현해야 한다.
+
+### 추가 요구사항
+- [ ✅ ] 아래 있는 InputView, OutputView 클래스를 참고하여 입출력 클래스를 구현한다.
+```
+public class InputView {
+    public int readDate() {
+        System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
+        String input = Console.readLine();    
+        // ...
+    }
+    // ...
+}
+```
+
+```
+public class OutputView {
+    public void printMenu() {
+        System.out.println("<주문 메뉴>");
+        // ...
+    }
+    // ...
+}
+```
+
+MVC패턴으로 작성한다.
+
+### Controller
+- ChristmasController (크리스마스 이벤트를 실행하기 위한 클래스)
+
+### Model
+- Category (메뉴 카테고리를 담당하는 클래스)
+- DateInfo (사용자가 방문할 날짜를 관리하기 위한 클래스)
+- DiscountCalculator (할인을 계산하기 위한 클래스)
+- EventBadge (뱃지를 적용하기 위한 클래스)
+- MenuItem (제시된 메뉴를 담당하기 위한 클래스)
+- OrderInfo (사용자 주문 정보를 담당하는 클래스)
+- Promotion (증정을 처리할 클래스)
+
+### View
+- InputView (입력을 담당하는 클래스)
+- OutputView (출력을 담당하는 클래스)
+
 ### 기능요구사항
 
 - [ ✅ ] 예상 방문 날짜를 입력한다.

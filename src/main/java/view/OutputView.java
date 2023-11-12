@@ -22,7 +22,7 @@ public class OutputView {
 
     public static void printInfoAfterOrder(EventBadge eventBadge, OrderInfo orderInfo, MenuItem champagne, DiscountCalculator discountCalculator, int totalDiscountPrize){
         printEventPreviewMessage();
-        printOrderMenu(orderInfo);
+        printMenu(orderInfo);
         printTotalOrderPriceBeforeDiscount(orderInfo);
         printPromotionMenu(champagne);
         printBenefitDetails(discountCalculator, champagne);
@@ -35,7 +35,7 @@ public class OutputView {
         System.out.println(OutputMessage.EVENT_PREVIEW_MESSAGE.getMessage() + NEW_LINE);
     }
 
-    private static void printOrderMenu(OrderInfo orderInfo){
+    private static void printMenu(OrderInfo orderInfo){
         System.out.println(OutputMessage.ORDER_MENU.getMessage());
         for (Map.Entry<MenuItem, Integer> entry : orderInfo.getOrderInfo().entrySet()) {
             MenuItem menuItem = entry.getKey();
