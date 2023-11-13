@@ -18,7 +18,7 @@ public class OutputView {
     private static final String NEW_LINE = "\n";
     private static final String QUANTITY = "개";
     private static final String WON = "원";
-    private static final String EMPTY = "없음";
+    private static final String BLANK = "";
 
     public static void printInfoAfterOrder(EventBadge eventBadge, OrderInfo orderInfo, MenuItem champagne, DiscountCalculator discountCalculator, int totalDiscountPrize){
         printEventPreviewMessage();
@@ -60,7 +60,7 @@ public class OutputView {
         System.out.println(OutputMessage.PROMOTION_MENU.getMessage());
         Optional.ofNullable(champagne)
                 .map(item -> item.getName() + SPACE + ONE + QUANTITY + NEW_LINE)
-                .ifPresentOrElse(System.out::println, () -> System.out.println(EMPTY + NEW_LINE));
+                .ifPresentOrElse(System.out::println, () -> System.out.println(OutputMessage.EMPTY.getMessage() + NEW_LINE));
     }
 
     private static void printBenefitDetails(DiscountCalculator discountCalculator, MenuItem champagne){
@@ -75,7 +75,7 @@ public class OutputView {
             printPromotionEvent(champagne);
             return;
         }
-        System.out.println(EMPTY + NEW_LINE);
+        System.out.println(OutputMessage.EMPTY.getMessage() + NEW_LINE);
     }
 
     private static boolean isDiscount(DiscountCalculator discountCalculator){
@@ -106,7 +106,7 @@ public class OutputView {
 
     private static String isTotalDiscountPrizeZero(int totalDiscountPrize){
         if(totalDiscountPrize == 0){
-            return "";
+            return BLANK;
         }
         return DASH;
     }
@@ -130,6 +130,6 @@ public class OutputView {
         System.out.println(OutputMessage.EVENT_BADGE.getMessage());
         Optional.ofNullable(eventBadge)
                 .map(item -> item.getName())
-                .ifPresentOrElse(System.out::println, () -> System.out.println(EMPTY + NEW_LINE));
+                .ifPresentOrElse(System.out::println, () -> System.out.println(OutputMessage.EMPTY.getMessage() + NEW_LINE));
     }
 }
