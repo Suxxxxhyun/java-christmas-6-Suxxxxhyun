@@ -1,10 +1,9 @@
 package domain;
 
 import exception.ExceptionMessage;
+import util.Constants;
 
 public class DateInfo {
-    private static final int DECEMBER_START = 1;
-    private static final int DECEMBER_END = 31;
 
     private final int visitedDate;
     public DateInfo(String readDate){
@@ -36,7 +35,7 @@ public class DateInfo {
 
     private void isInRange(String readDate){
         int visitedDate = convertStringToInt(readDate);
-        if(visitedDate < DECEMBER_START || visitedDate > DECEMBER_END){
+        if(visitedDate < Constants.DECEMBER_START.getValue() || visitedDate > Constants.DECEMBER_END.getValue()){
             ExceptionMessage.VISITED_DATE_NOT_NUMBER.throwException();
         }
     }

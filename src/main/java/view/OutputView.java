@@ -4,6 +4,7 @@ import domain.DiscountCalculator;
 import domain.EventBadge;
 import domain.MenuItem;
 import domain.OrderInfo;
+import util.Constants;
 import util.OutputMessage;
 
 import java.text.DecimalFormat;
@@ -11,8 +12,6 @@ import java.util.Map;
 import java.util.Optional;
 
 public class OutputView {
-
-    private static final int ONE = 1;
     private static final String SPACE = " ";
     private static final String DASH = "-";
     private static final String NEW_LINE = "\n";
@@ -59,7 +58,7 @@ public class OutputView {
     private static void printPromotionMenu(MenuItem champagne){
         System.out.println(OutputMessage.PROMOTION_MENU.getMessage());
         Optional.ofNullable(champagne)
-                .map(item -> item.getName() + SPACE + ONE + QUANTITY + NEW_LINE)
+                .map(item -> item.getName() + SPACE + Constants.ONE.getValue() + QUANTITY + NEW_LINE)
                 .ifPresentOrElse(System.out::println, () -> System.out.println(OutputMessage.EMPTY.getMessage() + NEW_LINE));
     }
 

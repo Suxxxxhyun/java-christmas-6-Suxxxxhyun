@@ -1,8 +1,8 @@
 package domain;
 
-public class Promotion {
+import util.Constants;
 
-    private static final int FREE_CHAMPAGNE_THRESHOLD = 120000;
+public class Promotion {
     private static MenuItem champagne;
 
     public Promotion(OrderInfo orderInfo){
@@ -15,7 +15,7 @@ public class Promotion {
 
     private MenuItem freeChampagnePromotion(OrderInfo orderInfo){
         int totalOrderAmount = orderInfo.getTotalOrderPrice();
-        if(totalOrderAmount >= FREE_CHAMPAGNE_THRESHOLD){
+        if(totalOrderAmount >= Constants.FREE_CHAMPAGNE_THRESHOLD.getValue()){
             return MenuItem.BEVERAGE_3;
         }
         return null;

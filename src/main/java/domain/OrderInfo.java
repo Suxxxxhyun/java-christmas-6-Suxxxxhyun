@@ -1,13 +1,11 @@
 package domain;
 
 import exception.ExceptionMessage;
+import util.Constants;
 
 import java.util.*;
 
 public class OrderInfo {
-
-    private static final int ZERO = 0;
-    private static final int TWENTY = 20;
 
     private Map<MenuItem, Integer> orderInfo;
 
@@ -40,8 +38,8 @@ public class OrderInfo {
     }
 
     private void init() {
-        totalCount = ZERO;
-        totalOrderPrice = ZERO;
+        totalCount = Constants.ZERO.getValue();
+        totalOrderPrice = Constants.ZERO.getValue();
         orderInfo = new HashMap<>();
     }
 
@@ -68,7 +66,7 @@ public class OrderInfo {
     }
 
     private void checkExceedQuantity() {
-        if(totalCount > TWENTY){
+        if(totalCount > Constants.TWENTY.getValue()){
             ExceptionMessage.INVALID_ORDER.throwException();
         }
     }

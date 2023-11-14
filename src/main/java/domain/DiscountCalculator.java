@@ -1,19 +1,12 @@
 package domain;
 
+import util.Constants;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Map;
 
 public class DiscountCalculator {
-    private static final int INITIAL_DISCOUNT_AMOUNT = 1000;
-    private static final int DAILY_DISCOUNT_INCREASE = 100;
-    private static final int MAX_DISCOUNT_AMOUNT = 3400;
-    private static final int ZERO = 0;
-    private static final int DECEMBER_START = 1;
-    private static final int CHRISTMAS = 25;
-    private static final int DECEMBER = 12;
-    private static final int YEAR = 2023;
-    private static final int ONE = 1;
     private static int totalDiscountPrice;
     private static int christmasDiscount;
     private static int weekDayDiscount;
@@ -23,11 +16,11 @@ public class DiscountCalculator {
     private static DayOfWeek customerVisitedDay;
 
     public DiscountCalculator(int visitedDate){
-        totalDiscountPrice = ZERO;
-        christmasDiscount = ZERO;
-        weekDayDiscount = ZERO;
-        weekendDiscount = ZERO;
-        specialDiscount = ZERO;
+        totalDiscountPrice = Constants.ZERO.getValue();
+        christmasDiscount = Constants.ZERO.getValue();
+        weekDayDiscount = Constants.ZERO.getValue();
+        weekendDiscount = Constants.ZERO.getValue();
+        specialDiscount = Constants.ZERO.getValue();
         customerVisitedDay = calculateDayOfWeek(visitedDate);
     }
 
@@ -53,39 +46,35 @@ public class DiscountCalculator {
 
     public void calculateDiscount(int totalOrderPrice, int visitedDate, OrderInfo orderInfo) {
         totalDiscountPrice += christmasDiscount(visitedDate);
-        System.out.println("크리스마스 데이 할인 = " + totalDiscountPrice);
-        totalDiscountPrice += weekDayDiscount(visitedDate, orderInfo);
-        System.out.println("평일 할인 = " + totalDiscountPrice);
-        totalDiscountPrice += weekendDiscount(visitedDate, orderInfo);
-        System.out.println("주말 할인 = " + totalDiscountPrice);
+        totalDiscountPrice += weekDayDiscount(orderInfo);
+        totalDiscountPrice += weekendDiscount(orderInfo);
         totalDiscountPrice += specialDiscountDay(visitedDate);
-        System.out.println("특별 할인 = " + totalDiscountPrice);
     }
 
     private int christmasDiscount(int visitedDate) {
         if(isChristmasDiscountDate(visitedDate)){
             int daysUntilChristmas = visitedDate - 1;
-            int discountAmount = INITIAL_DISCOUNT_AMOUNT + daysUntilChristmas * DAILY_DISCOUNT_INCREASE;
-            christmasDiscount = Math.min(discountAmount, MAX_DISCOUNT_AMOUNT);
+            int discountAmount = Constants.INITIAL_DISCOUNT_AMOUNT.getValue() + daysUntilChristmas * Constants.DAILY_DISCOUNT_INCREASE.getValue();
+            christmasDiscount = Math.min(discountAmount, Constants.MAX_DISCOUNT_AMOUNT.getValue());
         }
         return christmasDiscount;
     }
 
     private boolean isChristmasDiscountDate(int visitedDate){
-        if(visitedDate >= DECEMBER_START && visitedDate <= CHRISTMAS){
+        if(visitedDate >= Constants.DECEMBER_START.getValue() && visitedDate <= Constants.CHRISTMAS.getValue()){
             return true;
         }
         return false;
     }
 
-    private int weekDayDiscount(int visitedDate, OrderInfo orderInfo){
+    private int weekDayDiscount(OrderInfo orderInfo){
         if (isWeekday() && hasDessertOrder(orderInfo)) {
             weekDayDiscount = getWeekdayDessertDiscount(orderInfo);
         }
         return weekDayDiscount;
     }
 
-    private int weekendDiscount(int visitedDate, OrderInfo orderInfo){
+    private int weekendDiscount(OrderInfo orderInfo){
         if (isWeekend() && hasMainOrder(orderInfo)) {
             weekendDiscount = getWeekendMainDiscount(orderInfo);
         }
@@ -94,7 +83,7 @@ public class DiscountCalculator {
 
     private int specialDiscountDay(int visitedDate){
         if(customerVisitedDay == DayOfWeek.SUNDAY || isChristmas(visitedDate)){
-            specialDiscount = INITIAL_DISCOUNT_AMOUNT;
+            specialDiscount = Constants.INITIAL_DISCOUNT_AMOUNT.getValue();
         };
         return specialDiscount;
     }
@@ -112,8 +101,8 @@ public class DiscountCalculator {
     }
 
     private DayOfWeek calculateDayOfWeek(int visitedDate) {
-        LocalDate eventStartDate = LocalDate.of(YEAR, DECEMBER, DECEMBER_START);
-        LocalDate visitedDateLocal = eventStartDate.plusDays(visitedDate - ONE);
+        LocalDate eventStartDate = LocalDate.of(Constants.YEAR.getValue(), Constants.DECEMBER.getValue(), Constants.DECEMBER_START.getValue());
+        LocalDate visitedDateLocal = eventStartDate.plusDays(visitedDate - Constants.ONE.getValue());
         return visitedDateLocal.getDayOfWeek();
     }
 
@@ -137,7 +126,7 @@ public class DiscountCalculator {
                 .filter(entry -> entry.getKey().getCategory() == Category.DESSERT)
                 .mapToLong(Map.Entry::getValue)
                 .sum();
-        return (int) dessertCount * YEAR;
+        return (int) dessertCount * Constants.YEAR.getValue();
     }
 
     private int getWeekendMainDiscount(OrderInfo orderInfo) {
@@ -146,6 +135,6 @@ public class DiscountCalculator {
                 .filter(menuItem -> menuItem.getCategory() == Category.MAIN)
                 .count();
 
-        return (int) dessertCount * YEAR;
+        return (int) dessertCount * Constants.YEAR.getValue();
     }
 }
